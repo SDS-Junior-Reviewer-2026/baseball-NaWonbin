@@ -71,6 +71,8 @@ public class GameTest {
 
     @Test
     public void 볼만_있을_경우_0_strike_1_ball() {
+        generateQuestion("123");
+        assertMatchedNumber(game.guess("061"), false, 0, 1);
 
     }
 

@@ -6,8 +6,8 @@ public class Game {
 
     public GuessResult guess(String guessNumber) {
         assertIllegalArgument(guessNumber);
-        if (guessNumber.equals(question)) {
-            return new GuessResult(true, 3, 0);
+        if (isSolved(guessNumber)) {
+            return getGuessResult();
         } else {
             int strikes = 0;
             int balls = 0;
@@ -19,8 +19,20 @@ public class Game {
                     balls++;
                 }
             }
-            return new GuessResult(false, strikes, balls);
+            return createUnSolvedResult(strikes, balls);
         }
+    }
+
+    private GuessResult createUnSolvedResult(int strikes, int balls) {
+        return new GuessResult(false, strikes, balls);
+    }
+
+    private GuessResult getGuessResult() {
+        return new GuessResult(true, 3, 0);
+    }
+
+    private boolean isSolved(String guessNumber) {
+        return guessNumber.equals(question);
     }
 
     private void assertIllegalArgument(String guessNumber) {
